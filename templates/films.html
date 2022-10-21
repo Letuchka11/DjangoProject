@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Films</title>
+</head>
+<body>
+<h1>Films</h1>
+{% for film in films  %}
+    <h2>{{ film.title }}</h2>
+    <h3>Producer:{{ film.producer }}<br>
+    Rating:{{ film.rating}}<br>
+    Duration:{{ film.duration }}</h3>
+    <hr>
+{% endfor %}
+</body>
+</html>

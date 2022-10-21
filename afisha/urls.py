@@ -22,4 +22,6 @@ urlpatterns = [
     path('', views.index_view),
     path('about_us/' , views.about_us),
     path('date_now/' , views.date_now),
+    path('films/' , views.films_list_view),
+    path('films/<int:id>', views.films_id_view)
 ]
