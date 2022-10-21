@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render , Http404
 from datetime import datetime
 from .models import Films
 
 # Create your views here.
 def index_view(request):
-    return render(request , 'index.html')
+    return render(request, 'index.html')
 
 def about_us(request):
-    return render(request , 'about_us.html')
+    return render(request, 'about_us.html')
 
 def date_now(request):
     date = datetime.now()
@@ -18,16 +18,19 @@ def date_now(request):
         "hour" : date.hour,
         "seconds" : date.second
     }
-    return render(request, 'date_now.html' , context=context)
+    return render(request, 'date_now.html', context=context)
 
 def films_list_view(request):
     context = {
         "films" : Films.objects.all()
     }
-    return render(request , "films.html" , context=context)
+    return render(request, "films.html", context=context)
 
 def films_id_view(request, id):
     context = {}
-    film = Films.objects.get(id=id)
+    try:
+        film = Films.objects.get(id=id)
+    except Films.DoesNotExist:
+        raise Http404("Films not found")
     context['film_id'] = film
-    return render(request , 'film_id_list.html' , context=context)
+    return render(request, 'film_id_list.html', context=context)
