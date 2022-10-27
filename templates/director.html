@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Films</title>
+    <title>Director's Films</title>
 </head>
 <body>
 {% for director in directors %}
@@ -14,19 +14,13 @@
 <a href="/films/">
     <button>All films</button>
 </a>
-<a href="/admin/">
-    <button>admin</button>
-</a>
-<a href="/about_us/">
-    <button>About me</button>
-</a>
+<h1>Director: {{ director.name }}</h1>
+{% for film in director.directors.all %}
+<h1>Title: {{ film.title }},
 
-<h1>Films</h1>
-{% for film in films  %}
-    <h2>{{ film.title }}</h2>
-    <h3>Producer:{{ film.producer }}<br>
-    Rating:{{ film.rating}}<br>
-    Duration:{{ film.duration }}</h3>
+Rate: {{ film.rating }},
+
+Producer: {{ film.producer }}</h1>
     <hr>
 {% endfor %}
 </body>

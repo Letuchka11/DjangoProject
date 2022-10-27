@@ -2,8 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+class Director(models.Model):
+    name = models.CharField(max_length=70)
+
+    def __str__(self):
+        return self.name
 
 class Films(models.Model):
+    director = models.ForeignKey(Director, on_delete=models.PROTECT, related_name="directors" , null=True)
     title = models.CharField(max_length=250)
     producer = models.CharField(max_length=250)
     rating = models.FloatField()
