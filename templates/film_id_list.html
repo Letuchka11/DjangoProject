@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ film_id.title }}</title>
-</head>
-<body>
+{% extends 'lay_out.html' %}
+{% load static %}
+
+{% block content %}
  <h2>{{ film_id.title }}</h2>
  <h3>Producer:{{ film_id.producer }}<br>
     Rating:{{ film_id.rating}}<br>
     Duration:{{ film_id.duration }}</h3>
 <hr>
-</body>
-</html>
+{% endblock %}

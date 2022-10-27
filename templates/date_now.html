@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Date&Time</title>
-</head>
-<body>
+{% extends 'lay_out.html' %}
+{% load static %}
+
+{% block content %}
 <h1>
 Current time is {{ hour }}:{{ seconds }}
 </h1>
 <h2>
     Current date is {{ day }}.{{ month }}.{{ year }}
 </h2>
-</body>
-</html>
+{% endblock %}

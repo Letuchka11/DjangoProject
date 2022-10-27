@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main</title>
-</head>
-<body>
-<h1>Main Page</h1>
-<a href="/films/">
-    <button>All films</button>
-</a>
-<a href="/admin/">
-    <button>admin</button>
-</a>
-<a href="/about_us/">
-    <button>About me</button>
-</a>
+{% extends 'lay_out.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<h1>Main Page</h1>
+<br>
+<img src="{% static 'images/img1.jpg'%}" style="width: 500px; height: 650px">
+
+{% endblock %}
+
+
 

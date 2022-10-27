@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Director's Films</title>
-</head>
-<body>
-{% for director in directors %}
-    <a href="/director/{{ director.id }}/films">
-    <button>{{ director.name }}</button>
-    </a>
+{% extends 'lay_out.html' %}
+{% load static %}
 
-{% endfor %}
-<a href="/films/">
-    <button>All films</button>
-</a>
+{% block content %}
 <h1>Director: {{ director.name }}</h1>
 {% for film in director.directors.all %}
 <h1>Title: {{ film.title }},
@@ -23,5 +11,4 @@ Rate: {{ film.rating }},
 Producer: {{ film.producer }}</h1>
     <hr>
 {% endfor %}
-</body>
-</html>
+{% endblock %}
