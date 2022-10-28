@@ -1,8 +1,38 @@
-from django.shortcuts import render , Http404
+from django.shortcuts import render , Http404 , redirect
 from datetime import datetime
 from .models import Films , Director
+from .forms import DirectorForm , FilmFrom
+
 
 # Create your views here.
+def create_director_view(request):
+    context = {
+        'films' : Films.objects.all(),
+        'forms' : FilmFrom
+    }
+    if request.method == 'POST':
+        form = FilmFrom(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/films/')
+        context['form'] = form
+    return render(request , 'create_director.html' , context)
+
+
+def create_film_view(request):
+    context = {
+        'films' : Films.objects.all(),
+        'forms' : FilmFrom
+    }
+    if request.method == 'POST':
+        form = FilmFrom(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/films/')
+        context['form'] = form
+    return render(request , 'create_film.html' , context)
+
+
 def index_view(request):
     context={
         'director': Director.objects.all()
