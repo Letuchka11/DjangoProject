@@ -8,15 +8,17 @@ from .forms import DirectorForm , FilmFrom
 def create_director_view(request):
     context = {
         'films' : Films.objects.all(),
-        'forms' : FilmFrom
+        'forms' : DirectorForm
     }
-    if request.method == 'POST':
-        form = FilmFrom(data=request.POST)
+    if request.method == 'GET':
+        context['form'] = DirectorForm()
+        return render(request, 'create_director.html', context)
+    else:
+        form = DirectorForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('/films/')
-        context['form'] = form
-    return render(request , 'create_director.html' , context)
+
 
 
 def create_film_view(request):
@@ -24,13 +26,14 @@ def create_film_view(request):
         'films' : Films.objects.all(),
         'forms' : FilmFrom
     }
-    if request.method == 'POST':
+    if request.method == 'GET':
+        context['form'] = FilmFrom()
+        return render(request, 'create_film.html', context)
+    else:
         form = FilmFrom(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('/films/')
-        context['form'] = form
-    return render(request , 'create_film.html' , context)
 
 
 def index_view(request):
