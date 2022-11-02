@@ -19,7 +19,7 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_view),
+    path('main/', views.index_view),
     path('about_us/' , views.about_us),
     path('date_now/' , views.date_now),
     path('films/' , views.films_list_view),
@@ -27,4 +27,7 @@ urlpatterns = [
     path('director/<int:director_id>/films/', views.director_view),
     path('films/create/', views.create_film_view),
     path('director/create/' , views.create_director_view),
-]
+    path('register/' , views.register_view),
+    path('login/', views.login_view),
+    path('logout/', views.log_out_view)
+    ]

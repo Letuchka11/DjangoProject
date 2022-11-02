@@ -1,10 +1,52 @@
 from django.shortcuts import render , Http404 , redirect
 from datetime import datetime
 from .models import Films , Director
-from .forms import DirectorForm , FilmFrom
+from .forms import DirectorForm , FilmFrom ,UserCreateForm , UserLoginForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate , login , logout
 
+def log_out_view(request):
+    logout(request)
+    return redirect('/main/')
+
+def login_view(request):
+    context = {
+        'form': UserLoginForm,
+        'films': Films.objects.all()
+    }
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if not user:
+                return redirect('/login/')
+            else:
+                login(request, user)
+                return redirect('/main/')
+
+    return render(request, 'login.html', context=context)
+def register_view(request):
+    context = {
+        "form" : UserCreateForm(),
+        'films': Films.objects.all()
+
+    }
+    if request.method == "POST":
+        form = UserCreateForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            User.objects.create_user(username=username, password=password)
+            return redirect('/login/')
+        context['form'] = form
+    return render(request, 'register.html', context=context)
 
 # Create your views here.
+
+
+
 def create_director_view(request):
     context = {
         'films' : Films.objects.all(),
@@ -37,6 +79,7 @@ def create_film_view(request):
 
 
 def index_view(request):
+    print(request.user)
     context={
         'director': Director.objects.all()
     }

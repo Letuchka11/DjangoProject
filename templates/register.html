@@ -1,10 +1,10 @@
 {% extends 'lay_out.html' %}
 
 {% block content %}
-        <form action="/director/create/" method="post"
+        <form action="/register/" method="post"
           style="padding: 30px 330px;">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create Director" class="btn btn-success">
+        <input type="submit" value="Create user" class="btn btn-success">
     </form>
 {% endblock %}
