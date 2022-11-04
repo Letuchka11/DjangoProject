@@ -19,10 +19,7 @@
       {% for button in buttons %}
     <li class="page-item {% if button == active_page %}active{% endif %}"><a class="page-link" href="/films/?page={{ button }}">{{ button }}</a></li>
       {% endfor %}
-{#Сделал два варианта 'изчезания кнопки' , в Previous она выключается ,а в Next просто изчезает. Не решил какой будет лучше :3#}
-    {% if active_page < page_amount %}
-    <li class="page-item"><a class="page-link" href="/films/?page={{ next }}">Next</a></li>
-    {% endif %}
+    <li class="page-item {%  if active_page == page_amount%}disabled{% endif %}"><a class="page-link" href="/films/?page={{ next }}">Next</a></li>
   </ul>
 </nav>
 {% endblock %}
