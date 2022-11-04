@@ -29,5 +29,6 @@ urlpatterns = [
     path('director/create/' , views.create_director_view),
     path('register/' , views.register_view),
     path('login/', views.login_view),
-    path('logout/', views.log_out_view)
+    path('logout/', views.log_out_view),
+    path('search/' , views.search_view)
     ]

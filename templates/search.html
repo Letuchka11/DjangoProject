@@ -1,0 +1,16 @@
+{% extends 'lay_out.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Searched Films</h1>
+{% for film in films  %}
+    <h2>
+        <a href="/films/{{film.id}}/">{{ film.title }}</a></h2>
+
+    <h3>Director:{{ film.director }}<br>
+        Producer:{{ film.producer }}<br>
+    Rating:{{ film.rating}}<br>
+    Duration:{{ film.duration }}</h3>
+    <hr>
+{% endfor %}
+{% endblock %}

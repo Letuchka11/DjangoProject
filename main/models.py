@@ -9,6 +9,9 @@ class Director(models.Model):
     def __str__(self):        return self.name
 
 class Films(models.Model):
+    class Meta:
+        ordering = ['-rating', 'title']
+
     director = models.ForeignKey(Director, on_delete=models.PROTECT, related_name="directors" , null=True)
     title = models.CharField(max_length=250)
     producer = models.CharField(max_length=250)

@@ -5,6 +5,19 @@ from .forms import DirectorForm , FilmFrom ,UserCreateForm , UserLoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
 
+
+
+
+def search_view(request):
+    search_word = request.GET.get('search_word', '')
+    context = {
+        'films' : Films.objects.filter(title__icontains=search_word).exclude(title='Avatar'),
+        'search_word' : search_word,
+        'directors': Director.objects.all()
+    }
+    return render(request , 'search.html' , context=context)
+
+
 def log_out_view(request):
     logout(request)
     return redirect('/main/')
@@ -111,11 +124,25 @@ def date_now(request):
     }
     return render(request, 'date_now.html', context=context)
 
+
+
+PAGE_SIZE = 3
+
 def films_list_view(request):
+    page = int(request.GET.get('page', 1))
+    all_films = Films.objects.all()
+    films_list = all_films[PAGE_SIZE* (page - 1): PAGE_SIZE * page]
+    pages_amount = all_films.count() // PAGE_SIZE+1
     context = {
-        "films" : Films.objects.all(),
-        "directors": Director.objects.all()
+        "films" : films_list,
+        "directors": Director.objects.all(),
+        "buttons" : [i for i in range(1, pages_amount + 1)],
+        "page_amount" : pages_amount,
+        'active_page': page,
+        'previous' : page - 1,
+        'next' : page + 1
     }
+
     return render(request, "films.html", context=context)
 
 def films_id_view(request, id):
