@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate , login , logout
 def search_view(request):
     search_word = request.GET.get('search_word', '')
     context = {
-        'films' : Films.objects.filter(title__icontains=search_word).exclude(title='Avatar'),
+        'films' : Films.objects.filter(title__icontains=search_word),
         'search_word' : search_word,
         'directors': Director.objects.all()
     }
